@@ -1,20 +1,38 @@
 from mysql.connector import Error
 
-from db_connection import establish_connection, create_database, create_table, insert_data
+from db_connection import Connection
 
-# Global variables
+# Declare constant variables
 USERNAME = 'root'
 PASSWORD = '1234567890'
 HOST = 'localhost'
 
-connection = establish_connection(username=USERNAME, password=PASSWORD, host=HOST)
-
 try:
-    create_database(connection=connection, database_name='Joaquin')
-    create_table(connection=connection, database_name='Joaquin', table_name='hotdog')
-    insert_data(connection=connection, database_name='Joaquin', table_name='hotdog', data=3)
+    # Create an instance for the Connection class
+    connection = Connection(username=USERNAME, password=PASSWORD, host=HOST)
 
-except Error as error:
-    print(error)
-finally:
-    connection.close()
+    # Connect to the database
+    connection.establish_connection()
+
+    # Print options
+    print('Welcome to IPTC312')
+    print('Choose from the following options:')
+    print('1. Create a database')
+    print('2. Create a table')
+    print('3. Insert data into a table')
+    print('4. Update data in a table')
+    print('5. Delete data from a table')
+    print('6. Drop a table')
+    print('7. Select data from a table')
+    print('8. Exit\n')
+
+    # Ask the user
+    option = int(input('Enter your choice: '))
+
+    if option == 1:
+        database_name = input('Enter the name of the database: ')
+        connection.create_database(database_name=database_name)
+    elif option == 8:
+        print('Exit')
+except Error as e:
+    print('An error occurred:', e.msg)

@@ -1,29 +1,24 @@
 from mysql.connector import connect, Error
 
 
-def establish_connection(username, password, host):
-    try:
-        print(f'Username: {username}')
-        print(f'Password: {password}')
-        print(f'Connecting to {host}...')
+class Connection:
+    def __init__(self, username, password, host):
+        self.username = username
+        self.password = password
+        self.host = host
 
-        connection = connect(username=username, password=password, host=host)
+    def establish_connection(self):
+        connect(username=self.username, password=self.password, host=self.host)
+        print('Successfully connected')
 
-        print(f'Connection to {host} successful!')
-
-        return connection
-    except Error as error:
-        print(error)
-
-
-def create_database(connection, database_name):
-    try:
-        cursor = connection.cursor()
-        cursor.execute(f'CREATE DATABASE {database_name}')
-
-        print(f'Database {database_name} created successfully!')
-    except Error as error:
-        print(error)
+    def create_database(self, database_name):
+        try:
+            connection = connect(username=self.username, password=self.password, host=self.host)
+            cursor = connection.cursor()
+            cursor.execute(f'CREATE DATABASE {database_name}')
+            print(f'Successfully created {database_name}')
+        except Error as e:
+            print(e.msg)
 
 
 def create_table(connection, database_name, table_name):
