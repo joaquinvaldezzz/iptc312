@@ -34,14 +34,9 @@ class Connection:
         """)
         connection.commit()
 
-
-def insert_data(connection, database_name, table_name, data):
-    try:
+    def insert_data(self, database_name, table_name, data):
+        connection = self.establish_connection(database_name=database_name)
         cursor = connection.cursor()
-        cursor.execute(f'USE {database_name};')
-        cursor.execute(f'INSERT INTO {table_name} VALUES ({data});')
+        cursor.execute(f'INSERT INTO {table_name} (name) VALUES (%s)', data)
+        print('Data inserted successfully!')
         connection.commit()
-
-        print(f'Data inserted successfully!')
-    except Error as error:
-        print(error)
