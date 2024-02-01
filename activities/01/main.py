@@ -9,15 +9,15 @@ DATABASE = ''
 TABLE = ''
 HOST = 'localhost'
 
-try:
-    # Create an instance for the Connection class
-    connection = Connection(username=USERNAME, password=PASSWORD, database='', host=HOST)
+# Continuously run the program after each transaction and even if it prints an error
+while True:
+    try:
+        # Create an instance for the Connection class
+        connection = Connection(username=USERNAME, password=PASSWORD, database='', host=HOST)
 
-    # Connect to the database
-    connection.establish_connection('')
+        # Connect to the database
+        connection.establish_connection('')
 
-    # Continuously run the program after each transaction
-    while True:
         # Print options
         print('Welcome to IPTC312')
         print('Choose from the following options:')
@@ -61,6 +61,6 @@ try:
             break
         else:
             # Print an error-like message when the user inputs anything other than 1–8
-            print('Invalid input. Please try again.')
-except Error as e:
-    print('An error occurred:', e.msg)
+            print('\nInvalid input. Please try again.\n')
+    except Error as e:
+        print('An error occurred:', e.msg)
