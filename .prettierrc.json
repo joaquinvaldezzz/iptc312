@@ -4,7 +4,7 @@
   "singleQuote": true,
   "overrides": [
     {
-      "files": ["*.json", "*.md"],
+      "files": ["*.js", "*.json", "*.md"],
       "options": {
         "tabWidth": 2
       }
