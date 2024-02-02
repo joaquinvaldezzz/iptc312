@@ -1,6 +1,7 @@
 from mysql.connector import Error
 
 from db_connection import Connection
+from ordinal import ordinal
 
 # Declare constant variables
 USERNAME = 'root'
@@ -52,9 +53,13 @@ while True:
             # Pass the table name, so it can be used when inserting data to a table
             TABLE = table_name
         elif option == 3:
-            data = ['Valdez']
+            data_count = int(input('How many data do you want to insert?: '))
+            data = []
 
-            # Insert data to a table
+            for i in range(data_count):
+                data_input = input(f'Enter {ordinal(i + 1)} data: ')
+                data.append((data_input,))
+
             connection.insert_data(database_name=DATABASE, table_name=TABLE, data=data)
         elif option == 8:
             # Terminate the loop
@@ -63,4 +68,4 @@ while True:
             # Print an error-like message when the user inputs anything other than 1–8
             print('\nInvalid input. Please try again.\n')
     except Error as e:
-        print('An error occurred:', e.msg)
+        print('An error occurred:', e.msg, '\n')
