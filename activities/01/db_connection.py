@@ -1,4 +1,4 @@
-from mysql.connector import connect, Error
+from mysql.connector import connect
 
 
 class Connection:
@@ -37,6 +37,8 @@ class Connection:
     def insert_data(self, database_name, table_name, data):
         connection = self.establish_connection(database_name=database_name)
         cursor = connection.cursor()
-        cursor.execute(f'INSERT INTO {table_name} (name) VALUES (%s)', data)
-        print('Data inserted successfully!')
+
+        cursor.executemany(f'INSERT INTO {table_name} (name) VALUES (%s)', data)
+
         connection.commit()
+        print(f'\nInserted {len(data)} row(s) of data.\n')
