@@ -47,12 +47,12 @@ class Connection:
         cursor.execute(f'')
         connection.commit()
 
-    def delete_data(self, database_name, table_name, id):
+    def delete_data(self, database_name, table_name, data_id):
         connection = self.establish_connection(database_name=database_name)
         cursor = connection.cursor()
-        cursor.execute(f'DELETE FROM {table_name} WHERE id = {id};')
+        cursor.execute(f'DELETE FROM {table_name} WHERE id = {data_id};')
         connection.commit()
-        print(f'\nSuccessfully deleted data with an id of {id}.\n')
+        print(f'\nSuccessfully deleted data with an id of {data_id}.\n')
 
     def drop_table(self, database_name, table_name):
         connection = self.establish_connection(database_name=database_name)

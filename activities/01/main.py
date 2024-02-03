@@ -74,7 +74,7 @@ while True:
             print('Hello')
         elif option == 5:
             to_delete = int(input('Enter an id: '))
-            connection.delete_data(database_name=DATABASE, table_name=TABLE, id=to_delete)
+            connection.delete_data(database_name=DATABASE, table_name=TABLE, data_id=to_delete)
         elif option == 6:
             # Ask the user what is the name of the table they want to delete
             table_to_delete = input('Enter the name of the table you want to delete: ')
