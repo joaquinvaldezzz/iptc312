@@ -12,13 +12,12 @@ class Connection:
     def establish_connection(self, database_name):
         connection = connect(user=self.username, password=self.password, database=database_name,
                              host=self.host)
-        # print('Successfully connected')
         return connection
 
     def create_database(self, database_name):
         connection = self.establish_connection(database_name='')
         cursor = connection.cursor()
-        cursor.execute(f'CREATE DATABASE {database_name}')
+        cursor.execute(f'CREATE DATABASE {database_name};')
         connection.commit()
         print(f'Successfully created {database_name}')
 
@@ -38,7 +37,7 @@ class Connection:
     def insert_data(self, database_name, table_name, data):
         connection = self.establish_connection(database_name=database_name)
         cursor = connection.cursor()
-        cursor.executemany(f'INSERT INTO {table_name} (name) VALUES (%s)', data)
+        cursor.executemany(f'INSERT INTO {table_name} (name) VALUES (%s);', data)
         connection.commit()
         print(f'\nInserted {len(data)} row(s) of data.\n')
 
@@ -51,21 +50,21 @@ class Connection:
     def delete_data(self, database_name, table_name, id):
         connection = self.establish_connection(database_name=database_name)
         cursor = connection.cursor()
-        cursor.execute(f'DELETE FROM {table_name} WHERE id = {id}')
+        cursor.execute(f'DELETE FROM {table_name} WHERE id = {id};')
         connection.commit()
         print(f'\nSuccessfully deleted data with an id of {id}.\n')
 
     def drop_table(self, database_name, table_name):
         connection = self.establish_connection(database_name=database_name)
         cursor = connection.cursor()
-        cursor.execute(f'DROP TABLE {table_name}')
+        cursor.execute(f'DROP TABLE {table_name};')
         connection.commit()
         print(f'\nDropped table {table_name} successfully.\n')
 
     def select_data(self, database_name, choice, table_name):
         connection = self.establish_connection(database_name=database_name)
         cursor = connection.cursor()
-        cursor.execute(f'SELECT * FROM {table_name}')
+        cursor.execute(f'SELECT * FROM {table_name};')
 
         print()
 
