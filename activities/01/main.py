@@ -1,6 +1,6 @@
 from mysql.connector import Error
 
-from db_connection import Connection
+from db_connection import Connection, log
 from ordinal import ordinal
 
 # Declare constant variables
@@ -71,10 +71,21 @@ while True:
             # Insert the `data` to a table
             connection.insert_data(database_name=DATABASE, table_name=TABLE, data=data)
         elif option == 4:
-            print('Hello')
+            # Ask the user for the id they want to update
+            data_id = int(input('Enter the id you want to update: '))
+
+            # Ask the user for the new data
+            new_data = input('What do you want to change with it?: ')
+
+            # Update a row
+            connection.update_data(database_name=DATABASE, table_name=TABLE, data_id=data_id,
+                                   new_data=new_data)
         elif option == 5:
-            to_delete = int(input('Enter an id: '))
-            connection.delete_data(database_name=DATABASE, table_name=TABLE, data_id=to_delete)
+            # Ask the user for an id
+            data_to_delete = int(input('Enter an id: '))
+
+            # Delete a row from the table
+            connection.delete_data(database_name=DATABASE, table_name=TABLE, data_id=data_to_delete)
         elif option == 6:
             # Ask the user what is the name of the table they want to delete
             table_to_delete = input('Enter the name of the table you want to delete: ')
@@ -89,9 +100,10 @@ while True:
             connection.select_data(database_name=DATABASE, choice=choice, table_name=TABLE)
         elif option == 8:
             # Terminate the loop
+            log('Program terminated.')
             break
         else:
             # Print an error-like message when the user inputs anything other than 1–8
-            print('\nInvalid input. Please try again.\n')
+            log('Invalid input. Please try again.')
     except Error as e:
-        print('An error occurred:', e.msg, '\n')
+        log(f'An error occurred: {e.msg}')
