@@ -53,16 +53,39 @@ while True:
             # Pass the table name, so it can be used when inserting data to a table
             TABLE = table_name
         elif option == 3:
+            # Ask the user how many data they want to insert
             data_count = int(input('How many data do you want to insert?: '))
+
+            # Initialize an empty list
             data = []
 
+            # Continuously ask the user for their input
             for i in range(data_count):
+                # Use the `ordinal` function to transform `i` into 1st, 2nd, 3rd, and so on
                 data_input = input(f'Enter {ordinal(i + 1)} data: ')
+
+                # Insert their input to the `data` list
+                # Enclose it in parentheses, then place a comma, so it will become a tuple
                 data.append((data_input,))
 
+            # Insert the `data` to a table
             connection.insert_data(database_name=DATABASE, table_name=TABLE, data=data)
+        elif option == 4:
+            print('Hello')
+        elif option == 5:
+            to_delete = int(input('Enter an id: '))
+            connection.delete_data(database_name=DATABASE, table_name=TABLE, id=to_delete)
+        elif option == 6:
+            # Ask the user what is the name of the table they want to delete
+            table_to_delete = input('Enter the name of the table you want to delete: ')
+
+            # Delete the table
+            connection.drop_table(database_name=DATABASE, table_name=table_to_delete)
         elif option == 7:
+            # Ask the user if they want to display all data or not
             choice = input('Select all? Y/N: ')
+
+            # Select data depending on their choice
             connection.select_data(database_name=DATABASE, choice=choice, table_name=TABLE)
         elif option == 8:
             # Terminate the loop
