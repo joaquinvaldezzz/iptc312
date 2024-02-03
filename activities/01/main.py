@@ -61,6 +61,9 @@ while True:
                 data.append((data_input,))
 
             connection.insert_data(database_name=DATABASE, table_name=TABLE, data=data)
+        elif option == 7:
+            choice = input('Select all? Y/N: ')
+            connection.select_data(database_name=DATABASE, choice=choice, table_name=TABLE)
         elif option == 8:
             # Terminate the loop
             break
