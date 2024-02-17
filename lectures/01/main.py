@@ -12,6 +12,6 @@ class SkinCare(Product):
         print(f'Product Quantity: {self.product_quantity}')
 
 
-product = SkinCare(1, 'Dove', 'Soap', 12)
+product = SkinCare(product_id=1, product_name='', product_category='Soap', product_quantity=12)
 
 product.display_items()
