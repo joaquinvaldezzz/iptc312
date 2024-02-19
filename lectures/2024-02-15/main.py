@@ -1,8 +1,11 @@
 import tkinter as tk
 
+from playground.login.center_window import center_window
+
 window = tk.Tk()
-window.geometry('400x400')
 window.title('Main Window')
+
+center_window(width=400, height=400, window=window)
 
 label_text = tk.Label(master=window,
                       text='Type a message then click the button to extract the text')
@@ -21,7 +24,8 @@ def extract_text():
 entry_message = tk.Entry(master=window, justify='center')
 entry_message.pack()
 
-button_extract = tk.Button(master=window, text='Extract text', command=extract_text)
+button_extract = tk.Button(
+    master=window, text='Extract text', command=extract_text)
 button_extract.pack()
 
 window.mainloop()
