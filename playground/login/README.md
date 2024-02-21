@@ -1,12 +1,12 @@
 # Simple Sign up and Log in System
 
-1. Create a database:
+1. Create a database first called `IT_Department`:
 
    ```sql
    CREATE DATABASE IT_Department;
    ```
 
-2. Create a table:
+2. Then create an `Employees` table:
 
    ```sql
    USE IT_Department;
