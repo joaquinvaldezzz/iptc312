@@ -7,7 +7,7 @@ from connection import Connection
 
 # Define constants
 USERNAME = 'root'
-PASSWORD = '1234567890'
+PASSWORD = '1234567890'  # Change this to `root` or whatever password you set during installation
 DATABASE = 'IT_Department'
 HOST = 'localhost'
 
