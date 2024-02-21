@@ -41,7 +41,7 @@ def login():
 
     # Check if the username and password are not empty
     if len(entry_username.get()) != 0 and len(entry_password.get()) != 0:
-        connection.log_in(username, password)
+        connection.log_in(username, password)  # Change the `log_in` to `sign_up` for signing up
         entry_username.delete(0, tk.END)
         entry_password.delete(0, tk.END)
     # If the username and password are empty, display a message
