@@ -1,4 +1,4 @@
-# Simple Sign up and Log in Window
+# Simple Sign up and Log in System
 
 1. Create a database:
 
