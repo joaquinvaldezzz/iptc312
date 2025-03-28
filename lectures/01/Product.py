@@ -14,3 +14,15 @@ class Product:
         print(f'Product ID: {self.product_id}')
         print(f'Product Name: {self.product_name}')
         print(f'Product Category: {self.product_category}')
+
+
+class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+
+student = Student(name='Joaquin', age=21)
+
+print(student.name)  # Prints Joaquin
+print(student.age)  # Prints 21

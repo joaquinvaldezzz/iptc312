@@ -24,9 +24,9 @@ class Connection:
                 return
 
             cursor = connection.cursor()
-            hashed_password = self.hash_password(password)
+            # hashed_password = self.hash_password(password)
             query = 'INSERT INTO Employees (username, password) VALUES (%s, %s);'
-            cursor.execute(query, (username, hashed_password,))
+            cursor.execute(query, (username, password,))
             connection.commit()
             print('Data inserted')
 
@@ -40,12 +40,45 @@ class Connection:
             cursor.execute(query, (username,))
             data = cursor.fetchall()
 
-            if len(data) == 0:
-                print('Log in failed')
-            elif self.verify_password(password, data[0][1]):
+            if len(data) != 0:
                 print('Log in successful')
             else:
                 print('Log in failed')
+
+    def retrieve(self):
+        with self.establish_connection() as connection:
+            if connection is None:
+                return
+
+            cursor = connection.cursor()
+            query = 'SELECT * FROM Employees;'
+            cursor.execute(query)
+            data = cursor.fetchall()
+
+            if len(data) != 0:
+                print('Retrieval successful')
+                return data
+            else:
+                print('Retrieval failed')
+
+    def display(self, view):
+        view.delete(*view.get_children())
+        retrieved_data = self.retrieve()
+
+        for x in retrieved_data:
+            view.insert('', 'end', values=x)
+
+    def edit(self, id, username, password):
+        with self.establish_connection() as connection:
+            if connection is None:
+                return
+
+            cursor = connection.cursor()
+            # hashed_password = self.hash_password(password)
+            query = 'UPDATE Employees SET (username, password) VALUES (%s, %s) WHERE id = %s;'
+            cursor.execute(query, (username, password, id,))
+            connection.commit()
+            print('Data edited')
 
     @staticmethod
     def hash_password(password):
